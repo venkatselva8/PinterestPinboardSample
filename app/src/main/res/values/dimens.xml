@@ -1,0 +1,28 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="margin_vsmall">2dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_high">16dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="imageview_width">80dp</dimen>
+    <dimen name="imageview_height">80dp</dimen>
+
+    <!--Text size-->
+    <dimen name="min">12sp</dimen>
+    <dimen name="emin">13sp</dimen>
+    <dimen name="semi_largex">22sp</dimen>
+    <dimen name="large">24sp</dimen>
+    <dimen name="semi_medium">14sp</dimen>
+    <dimen name="semi_large">18sp</dimen>
+    <dimen name="semi_x_large">20sp</dimen>
+    <dimen name="medium">16sp</dimen>
+    <dimen name="semi_large_s">17sp</dimen>
+    <dimen name="extra_large">28sp</dimen>
+    <dimen name="hint">11sp</dimen>
+    <dimen name="very_small">10sp</dimen>
+    <dimen name="xx_large">40sp</dimen>
+
+
+</resources>
