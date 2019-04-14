@@ -6,8 +6,11 @@
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_high">16dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
-    <dimen name="imageview_width">80dp</dimen>
-    <dimen name="imageview_height">80dp</dimen>
+
+    <dimen name="padding_vsmall">2dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_high">16dp</dimen>
 
     <!--Text size-->
     <dimen name="min">12sp</dimen>
@@ -24,5 +27,8 @@
     <dimen name="very_small">10sp</dimen>
     <dimen name="xx_large">40sp</dimen>
 
+    <dimen name="padding_30dp">30dp</dimen>
+    <dimen name="padding_progress_bar">50dp</dimen>
+    <dimen name="card_pin_height">220dp</dimen>
 
 </resources>

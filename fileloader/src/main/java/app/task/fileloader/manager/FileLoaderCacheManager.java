@@ -33,7 +33,7 @@ public class FileLoaderCacheManager {
         return mDownloadDataTypeCache.put(key, fileLoaderDataModel) != null;
     }
 
-    public void clearTheCash() {
+    public void clearCache() {
         mDownloadDataTypeCache.evictAll();
     }
 }

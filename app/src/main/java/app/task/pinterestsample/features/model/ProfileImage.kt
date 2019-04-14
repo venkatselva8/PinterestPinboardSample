@@ -1,4 +1,4 @@
-package app.task.pinterestsample.model
+package app.task.pinterestsample.features.model
 
 import com.google.gson.annotations.SerializedName
 

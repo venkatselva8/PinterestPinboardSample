@@ -1,8 +1,8 @@
-package app.task.pinterestsample.model
+package app.task.pinterestsample.features.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class Pin(
 
 	@field:SerializedName("urls")
 	val urls: Urls? = null,

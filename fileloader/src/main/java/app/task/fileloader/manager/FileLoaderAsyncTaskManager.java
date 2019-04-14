@@ -7,7 +7,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 
 class FileLoaderAsyncTaskManager {
-    public AsyncHttpClient get(final FileLoaderDataModel fileLoaderDataModel, final FileLoaderStatusListener fileLoaderStatusListener) {
+    AsyncHttpClient get(final FileLoaderDataModel fileLoaderDataModel, final FileLoaderStatusListener fileLoaderStatusListener) {
         AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
         client.get(fileLoaderDataModel.getUrl(), new AsyncHttpResponseHandler() {
             @Override

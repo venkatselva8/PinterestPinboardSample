@@ -1,14 +1,76 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_small">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:padding="@dimen/padding_small"
+              style="@style/CommonViewWidthHeight">
 
-    <ImageView
-            android:id="@+id/fresco_imv"
-            android:layout_width="180dp"
-            android:layout_height="120dp"
-            android:contentDescription="@string/pin"
-    />
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_pin"
+            style="@style/CommonViewWidthHeight"
+            android:layout_margin="@dimen/margin_small"
+            app:cardElevation="@dimen/margin_vsmall"
+            app:cardCornerRadius="@dimen/margin_small"
+            app:cardUseCompatPadding="true">
 
-</RelativeLayout>
+        <LinearLayout
+                style="@style/VerticalLinearLayout">
+
+            <ImageView
+                    android:id="@+id/imv_pin_image"
+                    android:layout_height="@dimen/card_pin_height"
+                    android:layout_width="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitXY"
+                    tools:ignore="ContentDescription"/>
+
+            <RelativeLayout
+                    android:padding="@dimen/padding_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vsmall"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/colorWhite">
+
+                <TextView
+                        android:id="@+id/tv_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:drawableStart="@drawable/ic_favorite_black_24dp"
+                        android:padding="@dimen/padding_vsmall"
+                        android:drawablePadding="@dimen/padding_small"
+                        tools:text="0"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/semi_large"
+                        android:textColor="@color/grey800"/>
+
+                <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_toStartOf="@id/tv_like"
+                        android:textSize="@dimen/large"
+                        android:textColor="@color/grey800"
+                        tools:text=""/>
+                <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_title"
+                        android:layout_marginTop="@dimen/margin_vsmall"
+                        android:layout_toStartOf="@id/tv_like"
+                        android:textSize="@dimen/semi_medium"
+                        android:textColor="@color/grey700"
+                        android:visibility="gone"
+                        tools:text="PinDetails"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

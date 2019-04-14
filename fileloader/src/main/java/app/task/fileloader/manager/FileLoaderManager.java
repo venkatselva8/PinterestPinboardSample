@@ -8,20 +8,21 @@ import com.loopj.android.http.AsyncHttpClient;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Objects;
 
-public class FileLoaderDataType {
-    private static FileLoaderDataType instance;
+public class FileLoaderManager {
+    private static FileLoaderManager instance;
     private HashMap<String, LinkedList<FileLoaderDataModel>> allRequestsByKey = new HashMap<>();
     private HashMap<String, AsyncHttpClient> allRequestsClient = new HashMap<>();
     private FileLoaderCacheManager fileLoaderCacheManager;
 
-    private FileLoaderDataType() {
+    private FileLoaderManager() {
         fileLoaderCacheManager = FileLoaderCacheManager.getInstance();
     }
 
-    public static FileLoaderDataType getInstance() {
+    public static FileLoaderManager getInstance() {
         if (instance == null) {
-            instance = new FileLoaderDataType();
+            instance = new FileLoaderManager();
         }
         return instance;
     }
@@ -74,7 +75,7 @@ public class FileLoaderDataType {
 
             @Override
             public void onFailure(FileLoaderDataModel mDownloadDataType, int statusCode, byte[] errorResponse, Throwable e) {
-                for (FileLoaderDataModel m : allRequestsByKey.get(mDownloadDataType.getKeyMD5())) {
+                for (FileLoaderDataModel m : Objects.requireNonNull(allRequestsByKey.get(mDownloadDataType.getKeyMD5()))) {
                     m.setData(mDownloadDataType.getData());
                     m.getFileLoaderListener().onFailure(m, statusCode, errorResponse, e);
                 }
@@ -83,7 +84,7 @@ public class FileLoaderDataType {
 
             @Override
             public void onRetry(FileLoaderDataModel mDownloadDataType, int retryNo) {
-                for (FileLoaderDataModel m : allRequestsByKey.get(mDownloadDataType.getKeyMD5())) {
+                for (FileLoaderDataModel m : Objects.requireNonNull(allRequestsByKey.get(mDownloadDataType.getKeyMD5()))) {
                     m.setData(mDownloadDataType.getData());
                     m.getFileLoaderListener().onRetry(m, retryNo);
                 }
@@ -124,7 +125,7 @@ public class FileLoaderDataType {
         return allRequestsByKey.size() == 0;
     }
 
-    public void clearTheCash() {
-        fileLoaderCacheManager.clearTheCash();
+    public void clearCache() {
+        fileLoaderCacheManager.clearCache();
     }
 }
