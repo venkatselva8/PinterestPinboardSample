@@ -67,7 +67,7 @@ public class FileLoaderManager {
             public void onSuccess(FileLoaderDataModel mDownloadDataType) {
                 for (FileLoaderDataModel m : allRequestsByKey.get(mDownloadDataType.getKeyMD5())) {
                     m.setData(mDownloadDataType.getData());
-                    Log.e("HERRRR", m.comeFrom);
+                    Log.e("comeFrom", m.comeFrom);
                     m.getFileLoaderListener().onSuccess(m);
                 }
                 allRequestsByKey.remove(mDownloadDataType.getKeyMD5());

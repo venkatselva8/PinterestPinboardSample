@@ -1,4 +1,4 @@
-package app.task.pinterestsample.features.pinboard
+package app.task.pinterestsample.features
 
 import android.content.Context
 import app.task.fileloader.listener.FileLoaderListener
@@ -16,7 +16,8 @@ import java.nio.charset.StandardCharsets
  * Created by venkatesh on 13-Apr-19.
  */
 
-class PinPresenterImpl(val mContext: Context, val pinView: PinView) : PinPresenter {
+class PinPresenterImpl(val mContext: Context, val pinView: PinView) :
+    PinPresenter {
 
     var fileLoaderManager: FileLoaderManager = FileLoaderManager.getInstance()
 

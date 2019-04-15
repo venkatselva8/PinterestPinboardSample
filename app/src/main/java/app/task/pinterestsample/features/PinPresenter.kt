@@ -1,4 +1,4 @@
-package app.task.pinterestsample.features.pinboard
+package app.task.pinterestsample.features
 
 /*
  * Created by venkatesh on 13-Apr-19.

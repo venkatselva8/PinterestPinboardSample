@@ -1,4 +1,4 @@
-package app.task.pinterestsample.features.pinboard
+package app.task.pinterestsample.features
 
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,13 @@ import app.task.pinterestsample.util.DateUtil
 class PinAdapter(val listOfPins: ArrayList<Pin>) :
     RecyclerView.Adapter<PinAdapter.PinViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PinViewHolder {
-        return PinViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_pin, parent, false))
+        return PinViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_pin,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

@@ -3,8 +3,7 @@ package app.task.fileloader.manager;
 import android.util.LruCache;
 import app.task.fileloader.model.FileLoaderDataModel;
 
-public class FileLoaderCacheManager {
-    private int maxCacheSize;
+class FileLoaderCacheManager {
     private static FileLoaderCacheManager instance;
     private LruCache<String, FileLoaderDataModel> mDownloadDataTypeCache;
 
@@ -14,26 +13,26 @@ public class FileLoaderCacheManager {
         // int in its constructor.
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         // Use 1/8th of the available memory for this memory cache.
-        maxCacheSize = maxMemory / 8; // 4 * 1024 * 1024; // 4MiB
+        int maxCacheSize = maxMemory / 8;
         mDownloadDataTypeCache = new LruCache<>(maxCacheSize);
     }
 
-    public static FileLoaderCacheManager getInstance() {
+    static FileLoaderCacheManager getInstance() {
         if (instance == null) {
             instance = new FileLoaderCacheManager();
         }
         return instance;
     }
 
-    public FileLoaderDataModel getMDownloadDataType(String key) {
+    FileLoaderDataModel getMDownloadDataType(String key) {
         return mDownloadDataTypeCache.get(key);
     }
 
-    public boolean putMDownloadDataType(String key, FileLoaderDataModel fileLoaderDataModel) {
-        return mDownloadDataTypeCache.put(key, fileLoaderDataModel) != null;
+    void putMDownloadDataType(String key, FileLoaderDataModel fileLoaderDataModel) {
+        mDownloadDataTypeCache.put(key, fileLoaderDataModel);
     }
 
-    public void clearCache() {
+    void clearCache() {
         mDownloadDataTypeCache.evictAll();
     }
 }

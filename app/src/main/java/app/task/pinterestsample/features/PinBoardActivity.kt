@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.task.pinterestsample.R
 import app.task.pinterestsample.features.model.Pin
-import app.task.pinterestsample.features.pinboard.PinAdapter
-import app.task.pinterestsample.features.pinboard.PinPresenterImpl
+import app.task.pinterestsample.util.AppConstant
 import app.task.pinterestsample.util.AppUtil
-import kotlinx.android.synthetic.main.activity_main.*
+import app.task.pinterestsample.util.EndlessRecyclerViewScrollListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_pinboard.*
 
-class MainActivity : AppCompatActivity(), PinPresenterImpl.PinView {
+class PinBoardActivity : AppCompatActivity(), PinPresenterImpl.PinView {
 
     lateinit var tvMessage: TextView
     lateinit var rvPins: RecyclerView
@@ -25,31 +26,52 @@ class MainActivity : AppCompatActivity(), PinPresenterImpl.PinView {
     lateinit var swipeRefreshToPin: SwipeRefreshLayout
     var isPinLoadedSuccess = false
     lateinit var pinPresenterImpl: PinPresenterImpl
+    lateinit var fabClearCache: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_pinboard)
         setSupportActionBar(toolbar)
 
         rvPins = findViewById(R.id.rv_pins)
         tvMessage = findViewById(R.id.tv_message)
         progressBar = findViewById(R.id.progress_bar)
         swipeRefreshToPin = findViewById(R.id.swipe_refresh_pin)
+        fabClearCache = findViewById(R.id.fab_clear_cache)
         isPinLoadedSuccess = false
 
         pinPresenterImpl = PinPresenterImpl(this, this)
-        pinPresenterImpl.getPins()
+        val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rvPins.layoutManager = linearLayoutManager
+        rvPins.addOnScrollListener(object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            override fun onScrollStateChanged(scrollState: Int) {
+                if (scrollState == AppConstant.RECYCLERVIEW_SCROLL_ON_STOP) {
+                    fabClearCache.show()
+                } else {
+                    fabClearCache.hide()
+                }
+            }
+
+            override fun onLoadMore() {
+                //Pagination
+            }
+        })
 
         swipeRefreshToPin.setOnRefreshListener {
             pinPresenterImpl.getPins()
         }
+
+        fabClearCache.setOnClickListener {
+            cacheClear()
+        }
+
+        pinPresenterImpl.getPins()
     }
 
     override fun loadPins(listOfPin: ArrayList<Pin>) {
         isPinLoadedSuccess = true
         rvPins.visibility = View.VISIBLE
         tvMessage.visibility = View.GONE
-        rvPins.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvPins.adapter = PinAdapter(listOfPin)
     }
 
@@ -65,6 +87,8 @@ class MainActivity : AppCompatActivity(), PinPresenterImpl.PinView {
     }
 
     override fun showProgress() {
+        rvPins.visibility = View.GONE
+        tvMessage.visibility = View.GONE
         swipeRefreshToPin.isEnabled = false
         if (!isPinLoadedSuccess) {                        // On first time
             progressBar.visibility = View.VISIBLE
@@ -78,25 +102,6 @@ class MainActivity : AppCompatActivity(), PinPresenterImpl.PinView {
         }
         if (swipeRefreshToPin.isRefreshing) {
             swipeRefreshToPin.isRefreshing = false
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_clear_cache -> {
-                cacheClear()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
